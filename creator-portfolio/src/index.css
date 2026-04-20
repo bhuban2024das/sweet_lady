@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Rozha+One&display=swap');
+
+:root {
+  --color-bg: #FCF5EC; /* Garad Silk Off-White */
+  --color-text: #1A1A1A; /* Kajal Black */
+  --color-primary: #9B1C1C; /* Deep Sindoor / Alta Red */
+  --color-secondary: #C89C3C; /* Traditional Antique Gold */
+  --color-accent: #782020; /* Deep Terracotta */
+  --glass-bg: rgba(252, 245, 236, 0.45);
+  --glass-border: rgba(200, 156, 60, 0.3); /* Soft Gold border */
+  --glass-shadow: rgba(155, 28, 28, 0.08); /* Red-tinted shadow */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lora', serif; /* Elegant, poetic body font */
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Glassmorphism Utilities enhanced with Bengali elements */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(200, 156, 60, 0.4);
+  box-shadow: 0 4px 24px 0 rgba(155, 28, 28, 0.05);
+  border-radius: 24px;
+}
+
+/* Typography styles - Rozha One is a beautiful, Bengali-inspired display font */
+h1, h2, h3, h4, .bengali-display {
+  font-family: 'Rozha One', serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+p {
+  line-height: 1.6;
+  color: #4A3E3E;
+}
+
+/* Animated gradient background - Bengali theme (Alta & Haldi vibes) */
+.bengali-mesh-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(at 0% 0%, hsla(2, 61%, 90%, 1) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, hsla(37, 76%, 88%, 1) 0px, transparent 50%),
+              radial-gradient(at 100% 100%, hsla(350, 40%, 85%, 1) 0px, transparent 50%),
+              radial-gradient(at 0% 100%, hsla(45, 80%, 90%, 1) 0px, transparent 50%);
+  filter: blur(60px);
+  opacity: 0.85;
+  animation: pulse 15s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Hide scrollbar for cleanly scrolling carousels */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
