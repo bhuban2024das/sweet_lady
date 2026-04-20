@@ -3,13 +3,15 @@ import { useState } from 'react';
 import { Play } from 'lucide-react';
 
 const REELS = [
-  { id: 1, views: "1.2M", title: "GRWM for fashion week 💫", video: "/reels01.mp4", poster: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=400&h=700" },
-  { id: 2, views: "850K", title: "My everyday makeup routine", video: "/reels02.mp4", poster: "https://images.unsplash.com/photo-1512496115851-a52fb6108d5e?auto=format&fit=crop&q=80&w=400&h=700" },
-  { id: 3, views: "2.5M", title: "Aesthetic morning coffee ☕", video: "/reels03.mp4", poster: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=400&h=700" },
-  { id: 4, views: "500K", title: "Outfit of the day ✨", video: "/reels04.mp4", poster: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 1, views: "1.2M", title: "GRWM for fashion week 💫", video: "/reels-1.mp4", poster: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 2, views: "850K", title: "My everyday makeup routine", video: "/reels-2.mp4", poster: "https://images.unsplash.com/photo-1512496115851-a52fb6108d5e?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 3, views: "2.5M", title: "Aesthetic morning coffee ☕", video: "/reels-3.mp4", poster: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 4, views: "500K", title: "Outfit of the day ✨", video: "/reels-4.mp4", poster: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 5, views: "9M", title: "GRWM for fashion week 💫", video: "/reels-5.mp4", poster: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=400&h=700" },
+  { id: 6, views: "888K", title: "My everyday makeup routine", video: "/reels-6.mp4", poster: "https://images.unsplash.com/photo-1512496115851-a52fb6108d5e?auto=format&fit=crop&q=80&w=400&h=700" },
 ];
 
-export default function ReelsGrid() {
+export default function ReelsGrid({ onVideoPlayStateChange }) {
   const [activeReelId, setActiveReelId] = useState(null);
 
   return (
@@ -46,7 +48,7 @@ export default function ReelsGrid() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            animate={{ 
+            animate={{
               scale: activeReelId === reel.id ? 1.05 : 1,
             }}
             whileHover={{ y: -10 }}
@@ -57,9 +59,10 @@ export default function ReelsGrid() {
                 if (!clickedVid.muted) {
                   clickedVid.muted = true;
                   setActiveReelId(null);
+                  if (onVideoPlayStateChange) onVideoPlayStateChange(false);
                   return;
                 }
-                
+
                 // Mute all other videos on the entire page
                 document.querySelectorAll('video').forEach(v => {
                   v.muted = true;
@@ -68,11 +71,14 @@ export default function ReelsGrid() {
                 // Unmute the clicked video
                 clickedVid.muted = false;
                 setActiveReelId(reel.id);
+                if (onVideoPlayStateChange) onVideoPlayStateChange(true); // Silence background music immediately
+
                 clickedVid.play().catch(() => {
                   // Fallback if browser blocks unmuting
                   clickedVid.muted = true;
                   setActiveReelId(null);
-                  clickedVid.play().catch(() => {});
+                  if (onVideoPlayStateChange) onVideoPlayStateChange(false);
+                  clickedVid.play().catch(() => { });
                 });
               }
             }}

@@ -1,7 +1,26 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
+// Swap these links out with your 3 or 4 local DP filenames!
+const DP_IMAGES = [
+  "/dp01.png",
+  "/dp02.png",
+  "/dp03.png",
+  "/dp04.png",
+
+];
+
 export default function HeroSection() {
+  const [currentDpIndex, setCurrentDpIndex] = useState(0);
+
+  useEffect(() => {
+    // Automatically fades to the next picture every 3.5 seconds
+    const interval = setInterval(() => {
+      setCurrentDpIndex((prev) => (prev + 1) % DP_IMAGES.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section id="home" style={{
       minHeight: '100vh',
@@ -40,8 +59,9 @@ export default function HeroSection() {
           </h1>
 
           <p style={{ fontSize: '1.2rem', marginBottom: '40px', maxWidth: '400px' }}>
-            A visual diary woven with tradition and modern aesthetics. Exploring beauty, fashion, and the magic of everyday Bengali life.
-          </p>
+            Be like the moon,
+            even alone it doesn't stop shining✨
+            ‧͙⁺˚*･༓☾　☽༓･*˚⁺‧͙         </p>
 
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -85,22 +105,38 @@ export default function HeroSection() {
             zIndex: 0
           }} />
 
-          {/* Main Hero Image */}
-          <img
-            src="https://images.unsplash.com/photo-1542596594-649edbc13630?auto=format&fit=crop&q=80&w=800"
-            alt="Creator Portrait"
-            style={{
-              width: '100%',
-              maxWidth: '450px',
-              height: '600px',
-              objectFit: 'cover',
-              borderRadius: '200px 200px 0 0', /* Subtle arch shape a la historical windows */
-              borderBottom: '8px solid var(--color-secondary)',
-              position: 'relative',
-              zIndex: 1,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.15)'
-            }}
-          />
+          {/* Auto-Rotating Hero Image Slideshow */}
+          <div style={{
+            width: '100%',
+            maxWidth: '450px',
+            height: '600px',
+            position: 'relative',
+            zIndex: 1,
+            borderRadius: '200px 200px 0 0', /* Subtle arch shape a la historical windows */
+            borderBottom: '8px solid var(--color-secondary)',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+            overflow: 'hidden',
+            backgroundColor: 'var(--color-bg)'
+          }}>
+            <AnimatePresence>
+              <motion.img
+                key={currentDpIndex}
+                src={DP_IMAGES[currentDpIndex]}
+                alt="Creator Portrait"
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                style={{
+                  position: 'absolute',
+                  top: 0, left: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </AnimatePresence>
+          </div>
 
           {/* Floating Glass Badges */}
           <motion.div

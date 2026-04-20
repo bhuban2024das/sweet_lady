@@ -30,7 +30,7 @@ export default function BengaliBackground() {
         return (
           <motion.div
             key={index}
-            animate={{ opacity: [0, 0.7, 0], scale: [0.95, 1.05, 0.95], rotate: [0, 5, -5, 0] }}
+            animate={{ opacity: [0, 0.15, 0], scale: [0.95, 1.05, 0.95], rotate: [0, 5, -5, 0] }}
             transition={{
               duration: 10,
               repeat: Infinity,
@@ -43,7 +43,7 @@ export default function BengaliBackground() {
               left: el.left,
               right: el.right,
               bottom: el.bottom,
-              color: '#5A1010', // Changed to an ultra-dark maroon to make them visibly much darker
+              color: '#d68585', // Soft, light watercolor alta pink 
             }}
           >
             <Icon size={el.size} />
@@ -61,7 +61,7 @@ export default function BengaliBackground() {
             "polygon(0% 0, 100% 0, 100% 100%, 0% 100%)",     // 8s: Held in place
             "polygon(100% 0, 100% 0, 100% 100%, 100% 100%)"  // 10s: Vanished retreating right
           ],
-          opacity: [0, 1, 1, 0]
+          opacity: [0, 0.25, 0.25, 0] // Decreased to 25% peak opacity for a beautifully light wash
         }}
         transition={{ 
           duration: 10, 

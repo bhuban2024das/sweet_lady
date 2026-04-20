@@ -9,12 +9,15 @@ const DIARIES = [
     subtitle: 'Sarees, bindis, and pure Bengali aesthetics.',
     type: 'masonry',
     images: [
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600",
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=600",
-      "https://images.unsplash.com/photo-1485230405346-71acb9518d9c?auto=format&fit=crop&q=80&w=600",
-      "https://images.unsplash.com/photo-1512314889357-e157c22f938d?auto=format&fit=crop&q=80&w=600",
-      "https://images.unsplash.com/photo-1434389670869-c8ea23c316eb?auto=format&fit=crop&q=80&w=600",
-      "https://images.unsplash.com/photo-1492446845049-9c50cc313f00?auto=format&fit=crop&q=80&w=600",
+      "/home01.jpg",
+      "/home02.jpg",
+      "/home03.jpg",
+      "/home04.jpg",
+      "/home05.jpg",
+      "/home06.jpg",
+
+
+
     ]
   },
   {
@@ -23,10 +26,14 @@ const DIARIES = [
     subtitle: 'Grand moments and golden hours.',
     type: 'bento',
     images: [
-      "https://images.unsplash.com/photo-1544280590-534d0b04a081?auto=format&fit=crop&q=80&w=1200", // Main wide
-      "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=500", 
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=500",
-      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=500"
+
+
+      "/cafe01.png",
+      "/cafe02.png",
+      "/cafe03.png",
+      "/cafe04.png",
+      "/cafe05.png",
+      "/cafe06.png",
     ]
   },
   {
@@ -35,10 +42,12 @@ const DIARIES = [
     subtitle: 'Finding poetry in the ordinary streets.',
     type: 'cinematic',
     images: [
-      "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&q=80&w=1000", // wide top
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&q=80&w=500", // port left
-      "https://images.unsplash.com/photo-1512496115851-a52fb6108d5e?auto=format&fit=crop&q=80&w=500", // port right
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1000", // wide bottom
+      "/pose01.heic",
+      "/pose02.heic",
+      "/pose03.heic",
+      "/pose04.heic",
+      "/pose05.heic",
+      "/pose06.heic",
     ]
   }
 ];
@@ -86,49 +95,47 @@ export default function PhotoGallery() {
     if (diary.type === 'masonry') {
       return (
         <div style={{ columns: '3 250px', columnGap: '20px' }}>
-          {diary.images.map((src, i) => (
-            <motion.div whileHover={{ scale: 1.02 }} key={i} style={{ marginBottom: '20px', breakInside: 'avoid', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.05)' }}>
-              <img draggable={false} src={src} style={{ width: '100%', display: 'block', objectFit: 'cover' }} />
-            </motion.div>
-          ))}
+          {diary.images.map((src, i) => {
+            // Force random masonry stagger by hardcoding varied heights even if uploaded images are all squares
+            const staggerHeight = i % 2 === 0 ? '420px' : i % 3 === 0 ? '250px' : '360px';
+            return (
+              <motion.div whileHover={{ scale: 1.02 }} key={i} style={{ marginBottom: '20px', breakInside: 'avoid', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 20px rgba(0,0,0,0.05)', height: staggerHeight }}>
+                <img draggable={false} src={src} style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }} />
+              </motion.div>
+            );
+          })}
         </div>
       );
     } 
     else if (diary.type === 'bento') {
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          {/* Main Hero Shot */}
-          <motion.div whileHover={{ scale: 1.01 }} style={{ width: '100%', height: '500px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 24px rgba(0,0,0,0.1)' }}>
-            <img draggable={false} src={diary.images[0]} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </motion.div>
-          {/* Trio of supporting shots */}
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            {diary.images.slice(1).map((src, i) => (
-              <motion.div whileHover={{ scale: 1.03 }} key={i} style={{ flex: '1 1 250px', height: '350px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 16px rgba(0,0,0,0.08)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          {diary.images.map((src, i) => {
+            // Bento Box layout mathematically forces 1 large hero banner, and mixed medium squares below it safely wrapping.
+            const boxBasis = i === 0 ? '100%' : (i === 3 || i === 4) ? '45%' : '25%';
+            const boxHeight = i === 0 ? '450px' : '280px';
+            return (
+              <motion.div whileHover={{ scale: 1.03 }} key={i} style={{ flexGrow: 1, flexShrink: 1, flexBasis: boxBasis, height: boxHeight, borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 16px rgba(0,0,0,0.08)' }}>
                 <img draggable={false} src={src} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       );
     }
     else { // cinematic
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <motion.div whileHover={{ scale: 1.01 }} style={{ width: '100%', height: '350px', borderRadius: '16px', overflow: 'hidden' }}>
-            <img draggable={false} src={diary.images[0]} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </motion.div>
-          <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-            <motion.div whileHover={{ scale: 1.02 }} style={{ flex: '1 1 300px', height: '400px', borderRadius: '16px', overflow: 'hidden' }}>
-              <img draggable={false} src={diary.images[1]} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.02 }} style={{ flex: '1 1 300px', height: '400px', borderRadius: '16px', overflow: 'hidden' }}>
-              <img draggable={false} src={diary.images[2]} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </motion.div>
-          </div>
-          <motion.div whileHover={{ scale: 1.01 }} style={{ width: '100%', height: '350px', borderRadius: '16px', overflow: 'hidden' }}>
-            <img draggable={false} src={diary.images[3]} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-          </motion.div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+          {diary.images.map((src, i) => {
+            // Cinematic layout focuses on extremely tall side-by-side portraits randomly interrupted by wide panoramic shots.
+            const cineBasis = i === 2 || i === 5 ? '100%' : '45%';
+            const cineHeight = i === 2 || i === 5 ? '300px' : '550px';
+            return (
+              <motion.div whileHover={{ scale: 1.02 }} key={i} style={{ flexGrow: 1, flexShrink: 1, flexBasis: cineBasis, height: cineHeight, borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}>
+                <img draggable={false} src={src} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </motion.div>
+            );
+          })}
         </div>
       );
     }
@@ -136,7 +143,7 @@ export default function PhotoGallery() {
 
   return (
     <section id="gallery" style={{ padding: '100px 5%', maxWidth: '1200px', margin: '0 auto', overflowX: 'hidden' }}>
-      
+
       {/* Header and Controls */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
@@ -151,17 +158,17 @@ export default function PhotoGallery() {
           <button onClick={prevDiary} className="glass" style={{ width: '48px', height: '48px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none', cursor: 'pointer', color: 'var(--color-primary)' }}>
             <FaChevronLeft size={18} />
           </button>
-          
+
           <div style={{ display: 'flex', gap: '8px' }}>
             {DIARIES.map((_, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i); }}
                 style={{
                   width: '12px', height: '12px', borderRadius: '50%', cursor: 'pointer',
                   backgroundColor: i === index ? 'var(--color-primary)' : 'rgba(155, 28, 28, 0.2)',
                   transition: 'background 0.3s ease'
-                }} 
+                }}
               />
             ))}
           </div>
