@@ -37,7 +37,7 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
         <a href="#reels" className="nav-link" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic' }}>Reels</a>
         <a href="#gallery" className="nav-link" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic' }}>Gallery</a>
 
-        {/* Explicit Music Toggle Button */}
+        {/* Clean Vector Music Button */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -50,10 +50,17 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
             borderRadius: '20px',
             cursor: 'pointer',
             fontWeight: 700,
-            whiteSpace: 'nowrap' // Ensure the emojis don't stack above the text on narrow displays!
+            whiteSpace: 'nowrap', // Ensure the icons don't stack above the text on narrow displays!
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
           }}
         >
-          {isBgMuted ? "🔈 OFF" : "🔊 ON"}
+          {isBgMuted ? (
+            <><FaVolumeMute size={12} /> OFF</>
+          ) : (
+            <><FaVolumeUp size={12} /> ON</>
+          )}
         </motion.button>
       </div>
     </motion.nav>
