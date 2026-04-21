@@ -4,27 +4,29 @@ import { FaInstagram, FaPlayCircle, FaEnvelope, FaVolumeMute, FaVolumeUp } from 
 export default function Navbar({ isBgMuted, setIsBgMuted }) {
   return (
     <motion.nav
-      initial={{ y: -100, x: "-50%", opacity: 0 }}
-      animate={{ y: 0, x: "-50%", opacity: 1 }}
+      initial={{ y: -100, x: "50%", opacity: 0 }}
+      animate={{ y: 0, x: "0%", opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="nav-wrapper"
       style={{
         position: 'fixed',
-        top: '24px',
-        left: '50%',
+        top: '16px',
+        left: '166px',
+        right: '16px',
         // transform: 'translateX(-50%)' IS MOVED TO FRAMER MOTION ABOVE
         width: '85%',
         maxWidth: '850px',
+        margin: 'auto',
         display: 'flex',
         flexWrap: 'nowrap', // Strictly NEVER wrap. Let the CSS squish the gap naturally!
         justifyContent: 'space-between',
         alignItems: 'center',
         borderRadius: '30px',
         zIndex: 100,
-        background: 'rgba(252, 245, 236, 0.8)', 
+        background: 'rgba(252, 245, 236, 0.8)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(200, 156, 60, 0.4)', 
+        border: '1px solid rgba(200, 156, 60, 0.4)',
         boxShadow: '0 10px 30px rgba(155, 28, 28, 0.08)'
       }}
     >
