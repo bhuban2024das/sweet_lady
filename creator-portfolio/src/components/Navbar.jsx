@@ -16,10 +16,11 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
         maxWidth: '850px', // Width a little less, making it a floating pill
         display: 'flex',
         flexWrap: 'wrap', // Responsive wrapping for tight mobile devices
-        justifyContent: 'space-between',
+        justifyContent: 'center',
+        gap: '10px',
         alignItems: 'center',
-        padding: '10px 28px', // Thinner top/bottom padding for a sleek profile
-        borderRadius: '50px',
+        padding: '12px 24px', 
+        borderRadius: '30px',
         zIndex: 100,
         background: 'rgba(252, 245, 236, 0.8)', // Frosted Garad Silk
         backdropFilter: 'blur(16px)',
@@ -28,14 +29,14 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
         boxShadow: '0 10px 30px rgba(155, 28, 28, 0.08)' // Subtle Alta-tinted shadow
       }}
     >
-      <div className="bengali-display" style={{ fontSize: '1.8rem', color: 'var(--color-primary)' }}>
+      <div className="bengali-display" style={{ fontSize: 'clamp(1.5rem, 5vw, 1.8rem)', color: 'var(--color-primary)', minWidth: '150px', textAlign: 'center' }}>
         শ্রীজা_0828
       </div>
 
-      <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-        <a href="#home" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic' }}>Home</a>
-        <a href="#reels" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic' }}>Reels</a>
-        <a href="#gallery" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic' }}>Gallery</a>
+      <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 24px)', alignItems: 'center', justifyContent: 'center' }}>
+        <a href="#home" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Home</a>
+        <a href="#reels" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Reels</a>
+        <a href="#gallery" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Gallery</a>
 
         {/* Explicit Music Toggle Button */}
         <motion.button
@@ -43,32 +44,19 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsBgMuted(!isBgMuted)}
           style={{
-            color: isBgMuted ? '#666' : '#fff',
+            color: isBgMuted ? 'var(--color-text)' : '#fff',
             background: isBgMuted ? 'transparent' : 'var(--color-primary)',
             border: '1px solid var(--color-primary)',
             borderRadius: '20px',
             cursor: 'pointer',
             padding: '4px 12px',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-            marginLeft: '12px'
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            marginLeft: '8px'
           }}
         >
-          {isBgMuted ? "🔈 Sound Off" : "🔊 Sound On"}
+          {isBgMuted ? "OFF" : "ON"}
         </motion.button>
-      </div>
-
-      {/* Social Icons Container */}
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-        <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} href="#" style={{ color: 'var(--color-text)' }}>
-          <FaInstagram size={20} />
-        </motion.a>
-        <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} href="#" style={{ color: 'var(--color-text)' }}>
-          <FaPlayCircle size={20} />
-        </motion.a>
-        <motion.a whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} href="#" style={{ color: 'var(--color-text)' }}>
-          <FaEnvelope size={20} />
-        </motion.a>
       </div>
     </motion.nav>
   );

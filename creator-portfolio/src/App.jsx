@@ -13,6 +13,7 @@ function App() {
   const audioRef = useRef(null);
 
   useEffect(() => {
+    // Standard audio sync hook
     if (audioRef.current) {
       if (!isBgMuted && !isVideoPlaying) {
         audioRef.current.play().catch(e => console.log("Bg Audio error:", e));
@@ -20,6 +21,29 @@ function App() {
         audioRef.current.pause();
       }
     }
+  }, [isBgMuted, isVideoPlaying]);
+
+  // Global Audio Unlocker Protocol to bypass strict mobile browser autoplay blocks!
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (audioRef.current && !isBgMuted && !isVideoPlaying) {
+        audioRef.current.play().catch(() => {});
+      }
+      document.removeEventListener('touchstart', unlockAudio);
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('scroll', unlockAudio);
+    };
+    
+    // The very first time they touch, click, or scroll anywhere, force the music on!
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('scroll', unlockAudio, { once: true });
+    
+    return () => {
+      document.removeEventListener('touchstart', unlockAudio);
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('scroll', unlockAudio);
+    };
   }, [isBgMuted, isVideoPlaying]);
 
   return (
