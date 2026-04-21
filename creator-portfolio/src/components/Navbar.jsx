@@ -16,8 +16,8 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
         maxWidth: '850px', // Width a little less, making it a floating pill
         display: 'flex',
         flexWrap: 'wrap', // Responsive wrapping for tight mobile devices
-        justifyContent: 'center',
-        gap: '10px',
+        justifyContent: 'space-between',
+        gap: '5px',
         alignItems: 'center',
         padding: '12px 24px', 
         borderRadius: '30px',
@@ -29,11 +29,11 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
         boxShadow: '0 10px 30px rgba(155, 28, 28, 0.08)' // Subtle Alta-tinted shadow
       }}
     >
-      <div className="bengali-display" style={{ fontSize: 'clamp(1.5rem, 5vw, 1.8rem)', color: 'var(--color-primary)', minWidth: '150px', textAlign: 'center' }}>
+      <div className="bengali-display" style={{ fontSize: 'clamp(1.2rem, 4vw, 1.8rem)', color: 'var(--color-primary)' }}>
         শ্রীজা_0828
       </div>
 
-      <div style={{ display: 'flex', gap: 'clamp(12px, 3vw, 24px)', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: 'clamp(10px, 2.5vw, 24px)', alignItems: 'center', justifyContent: 'flex-end' }}>
         <a href="#home" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Home</a>
         <a href="#reels" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Reels</a>
         <a href="#gallery" style={{ textDecoration: 'none', color: 'var(--color-text)', fontStyle: 'italic', fontSize: 'clamp(0.85rem, 2.5vw, 1rem)' }}>Gallery</a>
@@ -55,7 +55,7 @@ export default function Navbar({ isBgMuted, setIsBgMuted }) {
             marginLeft: '8px'
           }}
         >
-          {isBgMuted ? "OFF" : "ON"}
+          {isBgMuted ? "🔈 OFF" : "🔊 ON"}
         </motion.button>
       </div>
     </motion.nav>
