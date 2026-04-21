@@ -4,15 +4,15 @@ import { FaInstagram, FaPlayCircle, FaEnvelope, FaVolumeMute, FaVolumeUp } from 
 export default function Navbar({ isBgMuted, setIsBgMuted }) {
   return (
     <motion.nav
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: -100, x: "-50%", opacity: 0 }}
+      animate={{ y: 0, x: "-50%", opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="nav-wrapper"
       style={{
         position: 'fixed',
         top: '24px',
         left: '50%',
-        transform: 'translateX(-50%)',
+        // transform: 'translateX(-50%)' IS MOVED TO FRAMER MOTION ABOVE
         width: '85%',
         maxWidth: '850px',
         display: 'flex',
