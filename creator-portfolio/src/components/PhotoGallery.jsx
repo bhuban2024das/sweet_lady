@@ -94,7 +94,7 @@ export default function PhotoGallery() {
   const renderLayout = (diary) => {
     if (diary.type === 'masonry') {
       return (
-        <div style={{ columns: '3 250px', columnGap: '20px' }}>
+        <div className="masonry-grid">
           {diary.images.map((src, i) => {
             // Force random masonry stagger by hardcoding varied heights even if uploaded images are all squares
             const staggerHeight = i % 2 === 0 ? '420px' : i % 3 === 0 ? '250px' : '360px';
